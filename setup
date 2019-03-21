@@ -1,3 +1,21 @@
 #!/bin/bash
 
 echo "Hello my friend, let's start..."
+
+echo "Cloning repository of a project:"
+mkdir ../temp
+mkdir server
+git clone https://github.com/trekawek/jhttp.git ../temp
+mv ../temp/* ./server
+rm -rf ../temp
+echo
+
+echo "Setting up docker environment..."
+docker build -f app/Dockerfile -t java_server:test .
+docker run --port 8888:8888 --name test -d java_server:test
+echo
+
+docker container ls | grep java_server:test
+echo
+
+echo 'You may check the work on http://localhost:8888'
