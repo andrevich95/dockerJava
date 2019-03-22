@@ -12,9 +12,10 @@ echo
 
 echo "Setting up docker environment..."
 docker build -f app/Dockerfile -t java_server:test .
-docker run --port 8888:8888 --name test -d java_server:test
+docker run -p 8888:8888 --name test -d java_server:test
 echo
 
+echo 'Info about container:'
 docker container ls | grep java_server:test
 echo
 
